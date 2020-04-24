@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>가위바위보게임</title>
+    </head>
+    <body>
+        <style>
+            .rspgame2 {
+                border: 20px solid yellowgreen;
+                position: relative;
+                width: 600px;
+                margin: 0 auto;
+                margin-top: 100px;
+                text-align: center;
+                padding: 20px;
+                padding-bottom: 50px;
+            }
+        </style>
+        <script>
+            function imgChange(num) {
+                var randomNum = parseInt(Math.random() * 3 + 1);
+                var com = document.getElementById("com");
+                var me = document.getElementById("me");
+                var result = document.getElementById("result");
+                // var srp = document.getElementById("srp");
+                if (randomNum == 1) {
+                    com.src = "./../images/scissors.jpg";
+                } else if (randomNum == 2) {
+                    com.src = "./../images/rock.jpg";
+                } else if (randomNum == 3) {
+                    com.src = "./../images/paper.jpg";
+                }
+                switch (num) {
+                    case 1:
+                        me.src = "./../images/scissors.jpg";
+                        break;
+                    case 2:
+                        me.src = "./../images/rock.jpg";
+                        break;
+                    case 3:
+                        me.src = "./../images/paper.jpg";
+                        break;
+                }
+                switch (num - randomNum) {
+                    case 0:
+                        console.log("비겼습니다");
+                        result.innerText = "비겼습니다";
+                        break;
+                    case 1:
+                    case -2:
+                        console.log("이겼습니다.");
+                        result.innerText = "이겼습니다";
+                        break;
+                    case -1:
+                    case 2:
+                        console.log("졌습니다.");
+                        result.innerText = "졌습니다";
+                        break;
+                }
+            }
+        </script>
+        <div class="rspgame2">
+            <h2 style="text-align: center;">가위바위보게임</h2>
+            <table border="1" align="center">
+                <tr>
+                    <td>컴퓨터</td>
+                    <td>나</td>
+                </tr>
+                <tr>
+                    <td><img id="com" src="./../images/start.png" width="220" height="220" alt="" /></td>
+                    <td><img id="me" src="./../images/start.png" width="220" height="220" alt="" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2" id="result" style="font-size: 2em; color: red;"></td>
+                </tr>
+            </table>
+            <input type="button" value="가위" onclick="imgChange(1)" />
+            <input type="button" value="바위" onclick="imgChange(2)" />
+            <input type="button" value="보" onclick="imgChange(3)" />
+        </div>
+    </body>
+</html>
