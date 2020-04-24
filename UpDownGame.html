@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <title>UpDownGame.html</title>
+        <style>
+            img {
+                width: 350px;
+                height: 350px;
+            }
+            input[type="text"] {
+                width: 100px;
+            }
+            .upDown {
+                border: 20px solid blue;
+                width: 500px;
+                position: relative;
+                margin: 0 auto;
+                margin-top: 100px;
+                text-align: center;
+            }
+        </style>
+        <script>
+            var countSpan,
+                num,
+                count = 0,
+                com = parseInt(Math.random() * 100 + 1);
+            console.log(com);
+
+            function upDown(obj) {
+                num = document.getElementById("input");
+                img = document.getElementById("img");
+                countSpan = document.getElementById("showcount");
+                console.log(num.value, com);
+                if (num.value == "") {
+                    alert("값을 입력하세요.");
+                    img.src = "./../images/error.jpg";
+                } else if (num.value > 100 || num.value < 0) {
+                    alert("1~100사이의 값을 입력하세요.");
+                    img.src = "./../images/error.jpg";
+                } else if (num.value < com) {
+                    console.log("up");
+                    img.src = "./../images/up.jpg";
+                    count++;
+                    countSpan.innerHTML = count;
+                    num.value = "";
+                } else if (num.value > com) {
+                    console.log("down");
+                    img.src = "./../images/down.jpg";
+                    count++;
+                    countSpan.innerHTML = count;
+                    num.value = "";
+                } else if (num.value == com) {
+                    countSpan.innerHTML = ++count;
+                    console.log("정답입니다.");
+                    alert("정답입니다");
+                    img.src = "./../images/answer.jpeg";
+                    obj.disabled = "disabled";
+                    return;
+                }
+                if (count == 7) {
+                    countSpan.innerHTML = count;
+                    alert("시도횟수를 초과하였습니다. 게임을 재시작합니다.");
+                    location.reload();
+                }
+            }
+            function restart() {
+                alert("게임을 재시작합니다.");
+                location.reload();
+            }
+        </script>
+    </head>
+    <body>
+        <div class="upDown">
+            <h2>업다운게임</h2>
+            <br />
+            <h3>1 ~ 100사이의 숫자를 입력하세요.</h3>
+            <br />
+            <h3>시도횟수:<span id="showcount" style="font-size: 2em;">0</span>회</h3>
+            <br />
+            <div>
+                <span><big>숫자입력 : </big></span> &nbsp; <input id="input" type="text" />&nbsp;&nbsp;
+                <button type="button" class="btn btn-success" onclick="upDown(this)">확인</button>&nbsp;
+                <button type="button" class="btn btn-info" onclick="restart()">재시작</button>
+            </div>
+            <br />
+            <img id="img" src="./../images/updowngame.jpg" alt="" />
+        </div>
+    </body>
+</html>
